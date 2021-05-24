@@ -58,7 +58,7 @@ exports.getDownloadStreamById = function (id) {
   }
 };
 
-exports.updateImageSizeById = async function (id, size) {
+exports.updateImageDimensionsById = async function (id, dimensions) {
   const db = getDBReference();
   const collection = db.collection('images.files');
   if (!ObjectId.isValid(id)) {
@@ -66,7 +66,7 @@ exports.updateImageSizeById = async function (id, size) {
   } else {
     const result = await collection.updateOne(
       { _id: new ObjectId(id) },
-      { $set: { "metadata.size": size }}
+      { $set: { "metadata.dimensions": dimensions }}
     );
     return result.matchedCount > 0;
   }};
